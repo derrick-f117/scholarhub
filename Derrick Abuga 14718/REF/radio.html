@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Radio Buttons</title>
+    <style>
+        /* Style for radio buttons */
+        .quiz-option {
+            display: block;
+            margin-bottom: 10px;
+        }
+        .quiz-option label {
+            cursor: pointer;
+            padding-left: 30px;
+            position: relative;
+        }
+        .quiz-option input[type="radio"] {
+            display: none;
+        }
+        .quiz-option label::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 2px;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #ccc;
+            border-radius: 50%;
+        }
+        .quiz-option input[type="radio"]:checked + label::before {
+            border-color: #4CAF50; /* Green color for correct answer */
+        }
+        .quiz-option.wrong input[type="radio"]:checked + label::before {
+            border-color: #FF5722; /* Red color for wrong answer */
+        }
+    </style>
+</head>
+<body>
+    <h1>Quiz: Which planet is closest to the Sun?</h1>
+    <div class="quiz-option">
+        <input type="radio" id="option1" name="planet" value="mercury">
+        <label for="option1">Mercury</label>
+    </div>
+    <div class="quiz-option wrong">
+        <input type="radio" id="option2" name="planet" value="venus">
+        <label for="option2">Venus</label>
+    </div>
+    <div class="quiz-option">
+        <input type="radio" id="option3" name="planet" value="earth">
+        <label for="option3">Earth</label>
+    </div>
+    <div class="quiz-option">
+        <input type="radio" id="option4" name="planet" value="mars">
+        <label for="option4">Mars</label>
+    </div>
+
+    <script>
+        // JavaScript to provide feedback
+        const correctAnswer = "mercury"; // Correct answer value
+        const options = document.querySelectorAll(".quiz-option input[type='radio']");
+        options.forEach(option => {
+            option.addEventListener("change", () => {
+                const selectedValue = option.value;
+                if (selectedValue === correctAnswer) {
+                    option.parentElement.classList.remove("wrong");
+                } else {
+                    option.parentElement.classList.add("wrong");
+                }
+            });
+        });
+    </script>
+</body>
+</html>
